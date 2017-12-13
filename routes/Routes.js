@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var knex = require('../db/knex');
 
-/* GET home page. */
+/* CONTACTS */
 router.get('/contacts', function(req, res, next) {
   knex('contacts').select().then(contacts => res.json(contacts))
 });
@@ -29,5 +29,23 @@ router.delete('/contacts/:id', function(req, res) {
   });
 });
 
+/* ACTIONS */
+
+router.get('/actions/:id', function(req, res, next) {
+  knex('actions').select().where("user_id", req.params.id).then(actions => res.json(actions))
+});
+
+
+/* MEETINGS */
+
+router.get('/meetings/:id', function(req, res, next) {
+  knex('meetings').select().where("user_id", req.params.id).then(meetings => res.json(meetings))
+});
+
+/* NOTES */
+
+router.get('/notes/:id', function(req, res, next) {
+  knex('notes').select().where("user_id", req.params.id).then(notes => res.json(notes))
+});
 
 module.exports = router;
