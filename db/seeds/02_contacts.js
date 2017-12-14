@@ -2,7 +2,7 @@ exports.seed = function(knex, Promise) {
   return knex('contacts').del()
     .then(function () {
       return knex('contacts').insert([
-        {user_id: 1, first_name: 'Dwight', last_name: 'Schrute', company: "Dunder Mifflin", profession: "Sales", email: "dwight@dm.com", phone: "(828) 929-3949", photo_url: "https://assets1.bigthink.com/system/idea_thumbnails/25298/primary/449px-The_Office__USA_-Dwight_Schrute.jpg?1291737714"},
+        {user_id: 1, first_name: 'Dwight', last_name: 'Schrute', company: "Dunder Mifflin", profession: "Sales", email: "dwight@dm.com", phone: "(828) 929-3949", photo_url: "http://cdn1.theodysseyonline.com/files/2016/02/22/635917076783020956-1943515409_dwight.jpeg"},
         {user_id: 1, first_name: 'Jim', last_name: 'Halpert', company: "Dunder Mifflin", profession: "Sales", email: "jim@dm.com", phone: "(828) 929-3949", photo_url: "https://pbs.twimg.com/profile_images/838818903933386752/rVy94Uu6.jpg"},
         {user_id: 1, first_name: 'Pam', last_name: 'Beesly', company: "Dunder Mifflin", profession: "Secretary", email: "pam@dm.com", phone: "(828) 929-3949", photo_url: "https://armchairmogul.files.wordpress.com/2009/12/pam-beesly-naked1.jpg"},
         {user_id: 1, first_name: 'Angela', last_name: 'Martin', company: "Dunder Mifflin", profession: "Accounting", email: "angela@dm.com", phone: "(828) 929-3949", photo_url: "https://pbs.twimg.com/profile_images/74258997/angela_400x400.PNG"},

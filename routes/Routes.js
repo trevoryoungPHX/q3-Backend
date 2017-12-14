@@ -32,7 +32,13 @@ router.delete('/contacts/:id', function(req, res) {
 /* ACTIONS */
 
 router.get('/actions/:id', function(req, res, next) {
-  knex('actions').select().where("user_id", req.params.id).then(actions => res.json(actions))
+  knex('actions').select().join("contacts","actions.contact_id", "contacts.id").where("actions.user_id", req.params.id).then(actions => res.json(actions))
+});
+
+router.post('/actions', function(req, res) {
+  knex('actions').insert(req.body).then(() => {
+    knex('actions').select().then(actions => res.json(actions))
+  });
 });
 
 
@@ -42,10 +48,22 @@ router.get('/meetings/:id', function(req, res, next) {
   knex('meetings').select().where("user_id", req.params.id).then(meetings => res.json(meetings))
 });
 
+router.post('/meetings', function(req, res) {
+  knex('meetings').insert(req.body).then(() => {
+    knex('meetings').select().then(meetings => res.json(meetings))
+  });
+});
+
 /* NOTES */
 
 router.get('/notes/:id', function(req, res, next) {
   knex('notes').select().where("user_id", req.params.id).then(notes => res.json(notes))
+});
+
+router.post('/notes', function(req, res) {
+  knex('notes').insert(req.body).then(() => {
+    knex('notes').select().then(notes => res.json(notes))
+  });
 });
 
 module.exports = router;
