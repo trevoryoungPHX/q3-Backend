@@ -23,7 +23,7 @@ router.patch('/contacts/:id', function(req, res) {
   });
 });
 
-router.delete('/contacts/:id', function(req, res) {
+router.delete('/contacts/delete/:id', function(req, res) {
   knex('contacts').del().where('id', req.params.id).then(function() {
     knex('contacts').select().then(contacts => res.json(contacts))
   });
@@ -40,6 +40,12 @@ router.post('/actions', function(req, res) {
     knex('actions').select().then(actions => res.json(actions))
   });
 });
+
+router.patch('/actions/update/:id', function(req, res){
+  knex('actions').update('is_completed', true).where('id', req.params.id).then(()=>{
+    knex('actions').select().then(actions => res.json(actions))
+  })
+})
 
 
 /* MEETINGS */
