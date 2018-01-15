@@ -32,18 +32,19 @@ router.delete('/contacts/delete/:id', function(req, res) {
 /* ACTIONS */
 
 router.get('/actions/:id', function(req, res, next) {
-  knex('actions').select().join("contacts","actions.contact_id", "contacts.id").where("actions.user_id", req.params.id).then(actions => res.json(actions))
+  knex('actions').select("actions.*", "contacts.first_name", "contacts.last_name", "contacts.profession", "contacts.company", "contacts.email", "contacts.phone", "contacts.photo_url").join("contacts","actions.contact_id", "contacts.id").where("actions.user_id", req.params.id).then(actions => res.json(actions))
 });
 
 router.post('/actions', function(req, res) {
   knex('actions').insert(req.body).then(() => {
-    knex('actions').select().then(actions => res.json(actions))
+    knex('actions').select().join("contacts","actions.contact_id", "contacts.id").then(actions => res.json(actions))
   });
 });
 
 router.patch('/actions/update/:id', function(req, res){
+  console.log(req.params.id)
   knex('actions').update('is_completed', true).where('id', req.params.id).then(()=>{
-    knex('actions').select().then(actions => res.json(actions))
+    knex('actions').select().join("contacts","actions.contact_id", "contacts.id").then(actions => res.json(actions))
   })
 })
 
